@@ -1,0 +1,1 @@
+This is a Spring Boot-based Employee and Department Management System with a simple web interface using Thymeleaf. It allows users to add, update and delete employees and departments efficiently. The application connects to a MySQL database and provides a clean navigation flow with a home page and search functionality.
