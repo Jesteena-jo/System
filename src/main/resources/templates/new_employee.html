@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Employee</title>
+    <style>
+      body {
+            background-color: #d0e7f9;
+        }
+
+        h2 {
+            text-align: center;
+        }
+        form {
+            width: 400px;
+            margin: 0 auto; /* center horizontally */
+            padding: 20px;
+            background-color: #f5faff;
+            border-radius: 10px;
+        }
+    </style>
+   
+</head>
+<body>
+    <h2>Add New Employee</h2>
+    <form th:action="@{/saveEmployee}" th:object="${employee}" method="post">
+        <label>Employee ID:</label>
+        <input type="hidden" th:field="*{empId}" readonly /> <br/><br/>
+        
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" required /> <br/><br/>
+        
+        <label>Date of Birth:</label>
+        <input type="date" th:field="*{dateOfBirth}" required /> <br/><br/>
+        
+        <label>Salary:</label>
+        <input type="number" th:field="*{salary}" required /> <br/><br/>
+        
+        <label>Address:</label>
+        <input type="text" th:field="*{address}" required /> <br/><br/>
+        
+        <label>Role Title:</label>
+        <input type="text" th:field="*{roleTitle}" required /> <br/><br/>
+        
+        <label>Joining Date:</label>
+        <input type="date" th:field="*{joiningDate}" required /> <br/><br/>
+        
+        <label>Yearly Bonus (%):</label>
+        <input type="number" th:field="*{yearlyBonusPercentage}" required /> <br/><br/>
+        
+        <label>Reporting Manager ID:</label>
+        <input type="number" th:field="*{reportingManagerId}" /> <br/><br/>
+        
+        <label>Department:</label>
+        <select th:field="*{department}">
+           <option th:each="dept : ${departments}" th:value="${dept.departmentId}" th:text="${#strings.escapeXml(dept.name)}"></option>
+  </select>
+         <br/><br/>
+        <button type="submit">Save</button>
+    </form>
+    <a href="/employees" style="color: blue;">Back To List</a>
+</body>
+</html>

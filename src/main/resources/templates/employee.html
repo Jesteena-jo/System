@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Employee Management</title>
+     <style>
+       body {
+            background-color: #d0e7f9;
+        }
+
+        h2 {
+            text-align: center;
+        }
+            
+         
+      </style>
+</head>
+
+<body>
+    <h2>Employee Management</h2>
+    <a href="/showNewEmployeeForm">Add New Employee</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Salary</th>
+                <th>Address</th>
+                <th>Role Title</th>
+                <th>Joining Date</th>
+                <th>Yearly Bonus (%)</th>
+                <th>Reporting Manager ID</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${listEmployees}">
+                <td th:text="${employee.empId}"></td>
+                <td th:text="${employee.name}"></td>
+               <td th:text="${#temporals.format(employee.dateOfBirth, 'yyyy-MM-dd')}"></td>
+                <td th:text="${employee.salary}"></td>
+                <td th:text="${employee.address}"></td>
+                <td th:text="${employee.roleTitle}"></td>
+                <td th:text="${#temporals.format(employee.joiningDate, 'yyyy-MM-dd')}"></td><td th:text="${employee.yearlyBonusPercentage}"></td>
+                <td th:text="${employee.reportingManagerId}"></td>
+                <td th:text="${employee.department.name}"></td>
+                <td>
+                    <a th:href="@{/showFormForUpdate/{id}(id=${employee.empId})}">Edit</a>
+                    <a th:href="@{/deleteEmployee/{id}(id=${employee.empId})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/" style="color: blue;">Back to Home</a>
+</body>
+
+</html>

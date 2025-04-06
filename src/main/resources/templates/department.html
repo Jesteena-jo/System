@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Department Management</title>
+    <style >
+      body {
+            background-color: #d0e7f9;
+        }
+
+        h2 {
+            text-align: center;
+        }
+        </style>
+</head>
+<body>
+    <h2>Department Management</h2>
+    <a href="/departmentForm">Add New Department</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Department ID</th>
+                <th>Name</th>
+                <th>Creation Date</th>
+                <th>Department Head ID</th>
+               
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dept : ${listDepartments}">
+                <td th:text="${dept.departmentId}"></td>
+                <td th:text="${dept.name}"></td>
+                <td th:text="${#temporals.format(dept.creationDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${dept.departmentHeadId}"></td>
+               
+                <td>
+                    <a th:href="@{/updateDepartment/{id}(id=${dept.departmentId})}">Edit</a>
+                    <a th:href="@{/deleteDepartment/{id}(id=${dept.departmentId})}" onclick="return confirm('Are you sure you want to delete this department?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/" style="color: blue;">Back to Home</a>
+</body>
+</html>
